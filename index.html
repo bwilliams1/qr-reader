@@ -14,9 +14,10 @@
       }
 
       .btn {
-        width:100px;
-        height: 50px;
+        width:200px;
+        height: 100px;
         margin-right: 50px;
+        font-size: 50px;
       }
     </style>
 </head>
@@ -107,7 +108,7 @@
     });
     document.getElementById('copy').addEventListener('click', () => {
         var range = document.createRange();
-        range.selectNode(document.getElementById('copy'));
+        range.selectNode(document.getElementById('cam-qr-result-text'));
         window.getSelection().removeAllRanges(); // clear current selection
         window.getSelection().addRange(range); // to select text
         document.execCommand("copy");
