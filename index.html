@@ -19,6 +19,13 @@
         margin-right: 50px;
         font-size: 50px;
       }
+
+      #dedupFields {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+     
     </style>
 </head>
 <body>
@@ -73,6 +80,11 @@
 <button id="start-button">Start</button>
 <button id="stop-button">Stop</button>
 <br>
+<div id="dedupFields">
+<input type="checkbox" id="dedup" name="dedup" checked>
+<label for="dedup"> Don't add duplicates</label><br>
+</div>
+<br>
 <span>Results:</span>
 <button id="copy" class="btn">Copy</button> <button id="clear" class="btn">Clear</button><!--<button>Save to File</button> -->
 <div id="cam-qr-result-text">
@@ -102,6 +114,7 @@
     const fileSelector = document.getElementById('file-selector');
     const fileQrResult = document.getElementById('file-qr-result');
     const camQrResultText = document.getElementById('cam-qr-result-text');
+    const dedupCheck = document.getElementById('dedup');
 
     document.getElementById('clear').addEventListener('click', () => {
         camQrResultText.innerHTML = "";
@@ -118,10 +131,14 @@
     function setResult(label, result) {
         console.log(result.data);
         label.textContent = result.data;
+
+        if(!camQrResultText.innerHTML.includes(result.data) || !dedupCheck.checked){
         var newbr = document.createElement("br");
         var newtext = document.createTextNode(result.data);
         camQrResultText.appendChild(newtext);
         camQrResultText.appendChild(newbr);
+        }
+
         camQrResultTimestamp.textContent = new Date().toString();
         label.style.color = 'teal';
         clearTimeout(label.highlightTimeout);
