@@ -101,7 +101,7 @@
     function setResult(label, result) {
         console.log(result.data);
         label.textContent = result.data;
-        newli = document.createElement("li");
+        var newli = document.createElement("li");
         newli.appendChild(document.createTextNode(result.data));
         camQrResultText.appendChild(newli);
         camQrResultTimestamp.textContent = new Date().toString();
