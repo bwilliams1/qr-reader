@@ -9,6 +9,9 @@
         width: 300px;
         border-width: 2px;
         border-style: solid;
+        list-style: none;
+        padding: 0;
+        margin:0;
       }
     </style>
 </head>
@@ -66,7 +69,10 @@
 <br>
 <span>Results:</span>
 <button>Clear</button><button>Copy</button><button>Save to File</button>
-<div id="cam-qr-result-text">42h-b7tv-jzx-4d<br>n42h-b7tv-jzx-4dz</div>
+<ul id="cam-qr-result-text">
+  <li>numb1</li>
+  <li>numb2</li>
+</ul>
 <hr>
 
 <h1>Scan from File:</h1>
@@ -95,7 +101,9 @@
     function setResult(label, result) {
         console.log(result.data);
         label.textContent = result.data;
-        camQrResultText.textContent += result.data + '<br>';
+        newli = document.createElement("li");
+        newli.appendChild(document.createTextNode(result.data));
+        camQrResultText.appendChild(newli);
         camQrResultTimestamp.textContent = new Date().toString();
         label.style.color = 'teal';
         clearTimeout(label.highlightTimeout);
