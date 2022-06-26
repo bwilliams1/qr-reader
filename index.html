@@ -77,6 +77,9 @@
 <b>Last detected at: </b>
 <span id="cam-qr-result-timestamp"></span>
 <br>
+<b>Last Entered: </b>
+<span id="cam-qr-result-last">None</span>
+<br>
 <button id="start-button">Start</button>
 <button id="stop-button">Stop</button>
 <br>
@@ -87,6 +90,9 @@
 <br>
 <span>Results:</span>
 <button id="copy" class="btn">Copy</button> <button id="clear" class="btn">Clear</button><!--<button>Save to File</button> -->
+<br>
+<span>Count: </span><span id="count">0</span>
+<br>
 <div id="cam-qr-result-text">
 </div>
 
@@ -115,9 +121,12 @@
     const fileQrResult = document.getElementById('file-qr-result');
     const camQrResultText = document.getElementById('cam-qr-result-text');
     const dedupCheck = document.getElementById('dedup');
+    const last = document.getElementById('cam-qr-result-last');
+    const count = document.getElementById('count');
 
     document.getElementById('clear').addEventListener('click', () => {
         camQrResultText.innerHTML = "";
+        count.textContent = 0;
     });
     document.getElementById('copy').addEventListener('click', () => {
         var range = document.createRange();
@@ -137,6 +146,8 @@
         var newtext = document.createTextNode(result.data);
         camQrResultText.appendChild(newtext);
         camQrResultText.appendChild(newbr);
+        last.textContent = result.data;
+        count.textContent =  count.textContent + 1;
         }
 
         camQrResultTimestamp.textContent = new Date().toString();
