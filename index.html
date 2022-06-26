@@ -67,7 +67,7 @@
 <button id="stop-button">Stop</button>
 <br>
 <span>Results:</span>
-<!-- <button>Clear</button><button>Copy</button><button>Save to File</button> -->
+<button id="copy" class="btn">Copy</button> <button id="clear" class="btn">Clear</button><!--<button>Save to File</button> -->
 <div id="cam-qr-result-text">
 </div>
 
@@ -95,6 +95,18 @@
     const fileSelector = document.getElementById('file-selector');
     const fileQrResult = document.getElementById('file-qr-result');
     const camQrResultText = document.getElementById('cam-qr-result-text');
+
+    document.getElementById('clear').addEventListener('click', () => {
+        camQrResultText.innerHTML = "";
+    });
+    document.getElementById('copy').addEventListener('click', () => {
+        var range = document.createRange();
+        range.selectNode(document.getElementById('copy'));
+        window.getSelection().removeAllRanges(); // clear current selection
+        window.getSelection().addRange(range); // to select text
+        document.execCommand("copy");
+        window.getSelection().removeAllRanges();// to deselect
+    });
 
     function setResult(label, result) {
         console.log(result.data);
@@ -186,6 +198,7 @@
             .then(result => setResult(fileQrResult, result))
             .catch(e => setResult(fileQrResult, { data: e || 'No QR code found.' }));
     });
+
 </script>
 
 <style>
