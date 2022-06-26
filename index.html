@@ -147,7 +147,7 @@
         camQrResultText.appendChild(newtext);
         camQrResultText.appendChild(newbr);
         last.textContent = result.data;
-        count.textContent =  count.textContent + 1;
+        count.textContent =  parseInt(count.textContent, 10) + 1;
         }
 
         camQrResultTimestamp.textContent = new Date().toString();
